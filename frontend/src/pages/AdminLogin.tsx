@@ -2,46 +2,47 @@ import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 const AdminLogin = () => {
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
   const navigate = useNavigate()
 
-  const [username,setUsername] = useState("")
-  const [password,setPassword] = useState("")
-  const [error,setError] = useState("")
+  const [username, setUsername] = useState("")
+  const [password, setPassword] = useState("")
+  const [error, setError] = useState("")
 
-  const handleLogin = async (e:React.FormEvent) => {
+  const handleLogin = async (e: React.FormEvent) => {
 
     e.preventDefault()
 
-    try{
+    try {
 
-      const res = await fetch("http://localhost:5000/admin/login",{
-        method:"POST",
-        headers:{
-          "Content-Type":"application/json"
+      const res = await fetch(`${BASE_URL}/admin/login`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
         },
-        body:JSON.stringify({username,password})
+        body: JSON.stringify({ username, password })
       })
 
       const data = await res.json()
 
-      if(data.success){
+      if (data.success) {
 
-        sessionStorage.setItem("adminAuth","true")
+        sessionStorage.setItem("adminAuth", "true")
 
         navigate("/admin/dashboard")
 
-      }else{
+      } else {
         setError("Invalid username or password")
       }
 
-    }catch(err){
+    } catch (err) {
       setError("Server error")
     }
 
   }
 
-  return(
+  return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
 
       <div className="w-[400px] bg-white shadow-lg p-8">
@@ -56,7 +57,7 @@ const AdminLogin = () => {
             type="text"
             placeholder="Username"
             value={username}
-            onChange={(e)=>setUsername(e.target.value)}
+            onChange={(e) => setUsername(e.target.value)}
             className="border p-3"
           />
 
@@ -64,7 +65,7 @@ const AdminLogin = () => {
             type="password"
             placeholder="Password"
             value={password}
-            onChange={(e)=>setPassword(e.target.value)}
+            onChange={(e) => setPassword(e.target.value)}
             className="border p-3"
           />
 

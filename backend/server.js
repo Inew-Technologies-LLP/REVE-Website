@@ -4,7 +4,7 @@ const express = require("express")
 const mysql = require("mysql2")
 const cors = require("cors")
 
-const app = express()   // ← THIS LINE CREATES app
+const app = express()
 
 app.use(cors())
 app.use(express.json())
@@ -121,39 +121,39 @@ app.put("/cakes/:id", (req, res) => {
   // ✅ If new images are provided → update images
   if (image_url !== undefined) {
 
-  sql = `
+    sql = `
     UPDATE cakes
     SET name=?, variant=?, category=?, eggless=?, image_url=?, description=?
     WHERE id=?
   `;
 
-  values = [
-    name,
-    variant,
-    category,
-    eggless,
-    JSON.stringify(image_url),
-    description,
-    req.params.id
-  ];
+    values = [
+      name,
+      variant,
+      category,
+      eggless,
+      JSON.stringify(image_url),
+      description,
+      req.params.id
+    ];
 
-} else {
+  } else {
 
-  sql = `
+    sql = `
     UPDATE cakes
     SET name=?, variant=?, category=?, eggless=?, description=?
     WHERE id=?
   `;
 
-  values = [
-    name,
-    variant,
-    category,
-    eggless,
-    description,
-    req.params.id
-  ];
-}
+    values = [
+      name,
+      variant,
+      category,
+      eggless,
+      description,
+      req.params.id
+    ];
+  }
 
   db.query(sql, values, (err, result) => {
 
@@ -203,7 +203,7 @@ app.post("/admin/forgot-password", (req, res) => {
 
 
 
-app.post("/chocolates", (req,res)=>{
+app.post("/chocolates", (req, res) => {
 
   const { name, variant, category, image_url } = req.body
 
@@ -215,13 +215,13 @@ app.post("/chocolates", (req,res)=>{
   db.query(
     sql,
     [name, variant, category, JSON.stringify(image_url)],
-    (err,result)=>{
-      if(err){
+    (err, result) => {
+      if (err) {
         console.log(err)
         return res.status(500).json(err)
       }
 
-      res.json({message:"Chocolate added"})
+      res.json({ message: "Chocolate added" })
     }
   )
 
@@ -247,16 +247,16 @@ app.delete("/cakes/:id", (req, res) => {
   });
 
 });
-app.get("/chocolates",(req,res)=>{
+app.get("/chocolates", (req, res) => {
 
-  db.query("SELECT * FROM chocolates",(err,result)=>{
+  db.query("SELECT * FROM chocolates", (err, result) => {
 
-    if(err){
+    if (err) {
       console.log(err)
       return res.status(500).json(err)
     }
 
-    const chocolates = result.map(item=>({
+    const chocolates = result.map(item => ({
       ...item,
       image_url: item.image_url || ""   // ✅ always string
     }))
@@ -268,7 +268,7 @@ app.get("/chocolates",(req,res)=>{
 })
 
 
-app.post("/chocolates", (req,res)=>{
+app.post("/chocolates", (req, res) => {
 
   const { name, variant, category, image_url } = req.body
 
@@ -280,13 +280,13 @@ app.post("/chocolates", (req,res)=>{
   db.query(
     sql,
     [name, variant, category, image_url || ""],
-    (err,result)=>{
-      if(err){
+    (err, result) => {
+      if (err) {
         console.log(err)
         return res.status(500).json(err)
       }
 
-      res.json({message:"Chocolate added"})
+      res.json({ message: "Chocolate added" })
     }
   )
 
@@ -338,11 +338,11 @@ app.delete("/chocolates/:id", (req, res) => {
 
 
 
-app.get("/hamper-hero",(req,res)=>{
+app.get("/hamper-hero", (req, res) => {
 
-  db.query("SELECT * FROM hamper_hero",(err,result)=>{
+  db.query("SELECT * FROM hamper_hero", (err, result) => {
 
-    if(err) return res.status(500).json(err)
+    if (err) return res.status(500).json(err)
 
     res.json(result)
 
@@ -351,18 +351,18 @@ app.get("/hamper-hero",(req,res)=>{
 })
 
 
-app.post("/hamper-hero",(req,res)=>{
+app.post("/hamper-hero", (req, res) => {
 
-  const {image_url} = req.body
+  const { image_url } = req.body
 
   db.query(
     "INSERT INTO hamper_hero (image_url) VALUES (?)",
     [image_url],
-    (err,result)=>{
+    (err, result) => {
 
-      if(err) return res.status(500).json(err)
+      if (err) return res.status(500).json(err)
 
-      res.json({message:"Hero image added"})
+      res.json({ message: "Hero image added" })
 
     }
   )
@@ -370,11 +370,11 @@ app.post("/hamper-hero",(req,res)=>{
 })
 
 
-app.get("/hamper-gallery",(req,res)=>{
+app.get("/hamper-gallery", (req, res) => {
 
-  db.query("SELECT * FROM hamper_gallery",(err,result)=>{
+  db.query("SELECT * FROM hamper_gallery", (err, result) => {
 
-    if(err) return res.status(500).json(err)
+    if (err) return res.status(500).json(err)
 
     res.json(result)
 
@@ -383,74 +383,74 @@ app.get("/hamper-gallery",(req,res)=>{
 })
 
 
-app.post("/hamper-gallery",(req,res)=>{
+app.post("/hamper-gallery", (req, res) => {
 
-  const {image_url} = req.body
+  const { image_url } = req.body
 
   db.query(
     "INSERT INTO hamper_gallery (image_url) VALUES (?)",
     [image_url],
-    (err,result)=>{
+    (err, result) => {
 
-      if(err) return res.status(500).json(err)
+      if (err) return res.status(500).json(err)
 
-      res.json({message:"Gallery image added"})
+      res.json({ message: "Gallery image added" })
 
     }
   )
 
 })
 
-app.put("/hamper-gallery/:id", (req,res)=>{
+app.put("/hamper-gallery/:id", (req, res) => {
 
   const { image_url } = req.body
   const id = req.params.id
 
   const sql = "UPDATE hamper_gallery SET image_url=? WHERE id=?"
 
-  db.query(sql,[image_url,id],(err,result)=>{
+  db.query(sql, [image_url, id], (err, result) => {
 
-    if(err){
+    if (err) {
       console.log(err)
       return res.status(500).json(err)
     }
 
-    res.json({message:"Gallery image updated"})
+    res.json({ message: "Gallery image updated" })
 
   })
 
 })
 
-app.put("/hamper-hero/:id", (req,res)=>{
+app.put("/hamper-hero/:id", (req, res) => {
 
   const { image_url } = req.body
   const id = req.params.id
 
   const sql = "UPDATE hamper_hero SET image_url=? WHERE id=?"
 
-  db.query(sql,[image_url,id],(err,result)=>{
+  db.query(sql, [image_url, id], (err, result) => {
 
-    if(err){
+    if (err) {
       console.log(err)
       return res.status(500).json(err)
     }
 
-    res.json({message:"Hero image updated"})
+    res.json({ message: "Hero image updated" })
 
   })
 
 })
 
-app.delete("/hamper-gallery/:id",(req,res)=>{
+app.delete("/hamper-gallery/:id", (req, res) => {
 
   db.query(
     "DELETE FROM hamper_gallery WHERE id=?",
     [req.params.id],
-    (err,result)=>{
+    (err, result) => {
 
-      if(err) return res.status(500).json(err)
+      if (err) return res.status(500).json(err)
 
-      res.json({message:"Deleted"})
+      res.json({ message: "Deleted" })
 
     }
   )
@@ -458,16 +458,16 @@ app.delete("/hamper-gallery/:id",(req,res)=>{
 })
 
 
-app.delete("/hamper-hero/:id",(req,res)=>{
+app.delete("/hamper-hero/:id", (req, res) => {
 
   db.query(
     "DELETE FROM hamper_hero WHERE id=?",
     [req.params.id],
-    (err,result)=>{
+    (err, result) => {
 
-      if(err) return res.status(500).json(err)
+      if (err) return res.status(500).json(err)
 
-      res.json({message:"Hero deleted"})
+      res.json({ message: "Hero deleted" })
 
     }
   )
@@ -747,9 +747,9 @@ app.delete("/workshops-types/:id", (req, res) => {
 })
 
 
-app.post("/upload-image", upload.single("image"), async (req,res)=>{
+app.post("/upload-image", upload.single("image"), async (req, res) => {
 
-  try{
+  try {
 
     const file = req.file
     const fileName = Date.now() + "-" + file.originalname
@@ -767,13 +767,15 @@ app.post("/upload-image", upload.single("image"), async (req,res)=>{
 
     res.json({ url: imageUrl })
 
-  }catch(error){
+  } catch (error) {
     console.log(error)
-    res.status(500).json({error:"Upload failed"})
+    res.status(500).json({ error: "Upload failed" })
   }
 
 })
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000")
-})
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
