@@ -45,6 +45,7 @@ const s3 = new S3Client({
 
 
 
+// GET ALL CAKES
 app.get("/cakes", (req, res) => {
 
   db.query("SELECT * FROM cakes", (err, result) => {
@@ -88,18 +89,20 @@ app.get("/cakes", (req, res) => {
 
 })
 
+
+// ADD CAKE
 app.post("/cakes", (req, res) => {
 
-  const { name, variant, category, eggless, image_url, description } = req.body;
+  const { name, category, eggless, image_url, description } = req.body;
 
   const sql = `
-    INSERT INTO cakes (name, variant, category, eggless, image_url, description)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO cakes (name, category, eggless, image_url, description)
+    VALUES (?, ?, ?, ?, ?)
   `;
 
   db.query(
     sql,
-    [name, variant, category, eggless, image_url, description],
+    [name, category, eggless, image_url, description],
     (err, result) => {
       if (err) {
         console.log(err);
@@ -111,25 +114,26 @@ app.post("/cakes", (req, res) => {
   );
 });
 
+
+// UPDATE CAKE
 app.put("/cakes/:id", (req, res) => {
 
-  const { name, variant, category, eggless, image_url, description } = req.body;
+  const { name, category, eggless, image_url, description } = req.body;
 
   let sql;
   let values;
 
-  // ✅ If new images are provided → update images
+  // ✅ If new images are provided
   if (image_url !== undefined) {
 
     sql = `
-    UPDATE cakes
-    SET name=?, variant=?, category=?, eggless=?, image_url=?, description=?
-    WHERE id=?
-  `;
+      UPDATE cakes
+      SET name=?, category=?, eggless=?, image_url=?, description=?
+      WHERE id=?
+    `;
 
     values = [
       name,
-      variant,
       category,
       eggless,
       JSON.stringify(image_url),
@@ -140,14 +144,13 @@ app.put("/cakes/:id", (req, res) => {
   } else {
 
     sql = `
-    UPDATE cakes
-    SET name=?, variant=?, category=?, eggless=?, description=?
-    WHERE id=?
-  `;
+      UPDATE cakes
+      SET name=?, category=?, eggless=?, description=?
+      WHERE id=?
+    `;
 
     values = [
       name,
-      variant,
       category,
       eggless,
       description,
@@ -185,47 +188,8 @@ app.post("/admin/login", (req, res) => {
 
 })
 
-app.post("/admin/forgot-password", (req, res) => {
-
-  const { email, newPassword } = req.body
-
-  const sql = "UPDATE admins SET password=? WHERE email=?"
-
-  db.query(sql, [newPassword, email], (err, result) => {
-
-    if (err) return res.status(500).json(err)
-
-    res.json({ message: "Password updated successfully" })
-
-  })
-
-})
 
 
-
-app.post("/chocolates", (req, res) => {
-
-  const { name, variant, category, image_url } = req.body
-
-  const sql = `
-  INSERT INTO chocolates (name, variant, category, image_url)
-  VALUES (?, ?, ?, ?)
-  `
-
-  db.query(
-    sql,
-    [name, variant, category, JSON.stringify(image_url)],
-    (err, result) => {
-      if (err) {
-        console.log(err)
-        return res.status(500).json(err)
-      }
-
-      res.json({ message: "Chocolate added" })
-    }
-  )
-
-})
 
 
 
@@ -441,38 +405,7 @@ app.put("/hamper-hero/:id", (req, res) => {
 
 })
 
-app.delete("/hamper-gallery/:id", (req, res) => {
 
-  db.query(
-    "DELETE FROM hamper_gallery WHERE id=?",
-    [req.params.id],
-    (err, result) => {
-
-      if (err) return res.status(500).json(err)
-
-      res.json({ message: "Deleted" })
-
-    }
-  )
-
-})
-
-
-app.delete("/hamper-hero/:id", (req, res) => {
-
-  db.query(
-    "DELETE FROM hamper_hero WHERE id=?",
-    [req.params.id],
-    (err, result) => {
-
-      if (err) return res.status(500).json(err)
-
-      res.json({ message: "Hero deleted" })
-
-    }
-  )
-
-})
 
 // =======================
 // WORKSHOPS HERO
@@ -613,21 +546,7 @@ app.put("/workshops-gallery/:id", (req, res) => {
 
 
 // DELETE GALLERY IMAGE
-app.delete("/workshops-gallery/:id", (req, res) => {
 
-  db.query(
-    "DELETE FROM workshops_gallery WHERE id=?",
-    [req.params.id],
-    (err, result) => {
-
-      if (err) return res.status(500).json(err)
-
-      res.json({ message: "Deleted" })
-
-    }
-  )
-
-})
 
 // =======================
 // WORKSHOP TYPES
@@ -717,34 +636,6 @@ app.put("/workshops-types/:id", (req, res) => {
 })
 
 
-// DELETE TYPE
-app.delete("/workshops-types/:id", (req, res) => {
-
-  db.query("DELETE FROM workshops_types WHERE id=?", [req.params.id], (err) => {
-
-    if (err) return res.status(500).json(err)
-
-    res.json({ message: "Deleted" })
-
-  })
-
-})
-// DELETE TYPE
-app.delete("/workshops-types/:id", (req, res) => {
-
-  db.query(
-    "DELETE FROM workshops_types WHERE id=?",
-    [req.params.id],
-    (err, result) => {
-
-      if (err) return res.status(500).json(err)
-
-      res.json({ message: "Deleted" })
-
-    }
-  )
-
-})
 
 
 app.post("/upload-image", upload.single("image"), async (req, res) => {

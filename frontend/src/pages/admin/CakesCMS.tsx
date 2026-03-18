@@ -3,7 +3,6 @@ import { useEffect, useState } from "react"
 interface Cake {
   id:number
   name:string
-  variant:string
   category:string
   eggless:boolean
   description:string
@@ -21,7 +20,6 @@ const CakesCMS = () => {
 
   const [form,setForm] = useState({
     name:"",
-    variant:"",
     category:"",
     eggless:false,
     description:""
@@ -128,7 +126,6 @@ const CakesCMS = () => {
 
       setForm({
         name:"",
-        variant:"",
         category:"",
         eggless:false,
         description:""
@@ -162,7 +159,6 @@ const CakesCMS = () => {
 
     setForm({
       name:cake.name,
-      variant:cake.variant,
       category:cake.category,
       eggless:cake.eggless,
       description:cake.description || ""
@@ -203,13 +199,7 @@ const CakesCMS = () => {
           className="border p-2"
         />
 
-        <input
-          name="variant"
-          placeholder="Variant"
-          value={form.variant}
-          onChange={handleChange}
-          className="border p-2"
-        />
+        
 
         <input
           name="category"
@@ -305,7 +295,7 @@ const CakesCMS = () => {
             <th className="p-3 border">ID</th>
             <th className="p-3 border">Name</th>
             <th className="p-3 border">Category</th>
-            <th className="p-3 border">Variant</th>
+           
             <th className="p-3 border">Eggless</th>
             <th className="p-3 border">Description</th>
             <th className="p-3 border">Images</th>
@@ -322,7 +312,7 @@ const CakesCMS = () => {
               <td className="p-3 border">{cake.id}</td>
               <td className="p-3 border">{cake.name}</td>
               <td className="p-3 border">{cake.category}</td>
-              <td className="p-3 border">{cake.variant}</td>
+              
               <td className="p-3 border">{cake.eggless ? "Yes" : "No"}</td>
 
               <td className="p-3 border max-w-[200px] truncate">
