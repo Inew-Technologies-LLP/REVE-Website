@@ -15,7 +15,7 @@ interface WorkshopType {
 
 const WorkshopsCMS = () => {
 
-  const BASE_URL = "http://localhost:5000"
+  const BASE_URL = import.meta.env.VITE_API_URL
 
   const [heroImages, setHeroImages] = useState<ImageItem[]>([])
   const [galleryImages, setGalleryImages] = useState<ImageItem[]>([])
@@ -28,10 +28,8 @@ const WorkshopsCMS = () => {
     tag: ""
   })
 
-  // 🔥 NEW
   const [isUploading,setIsUploading] = useState(false)
 
-  // ================= FETCH =================
   const fetchWorkshops = async () => {
     const heroRes = await fetch(`${BASE_URL}/workshops-hero`)
     setHeroImages(await heroRes.json())
@@ -50,7 +48,6 @@ const WorkshopsCMS = () => {
     fetchTypes()
   }, [])
 
-  // ================= UPLOAD =================
   const uploadImage = async (file: File) => {
 
     try{
@@ -74,7 +71,6 @@ const WorkshopsCMS = () => {
 
   }
 
-  // ================= HERO =================
   const addHero = async (e: any) => {
 
     if (heroImages.length >= 8) {
@@ -112,9 +108,6 @@ const WorkshopsCMS = () => {
     fetchWorkshops()
   }
 
-  
-
-  // ================= GALLERY =================
   const addGallery = async (e: any) => {
 
     if (galleryImages.length >= 16) {
@@ -152,9 +145,6 @@ const WorkshopsCMS = () => {
     fetchWorkshops()
   }
 
-  
-
-  // ================= TYPES =================
   const addType = async () => {
 
     if (types.length >= 2) {
@@ -203,9 +193,6 @@ const WorkshopsCMS = () => {
     fetchTypes()
   }
 
-  
-
-  // ================= UI =================
   return (
     <div>
 
@@ -213,14 +200,12 @@ const WorkshopsCMS = () => {
         Workshops CMS
       </h2>
 
-      {/* 🔥 Uploading Indicator */}
       {isUploading && (
         <p className="text-blue-600 mb-4">
           Uploading...
         </p>
       )}
 
-      {/* HERO */}
       <h3 className="text-lg mb-4">Hero Images (Max 8)</h3>
 
       <table className="w-full border mb-6">
@@ -234,7 +219,6 @@ const WorkshopsCMS = () => {
               <td className="border p-2 text-center">
                 <input type="file" disabled={isUploading} onChange={(e) => replaceHero(img.id, e)} />
               </td>
-              
             </tr>
           ))}
         </tbody>
@@ -242,7 +226,6 @@ const WorkshopsCMS = () => {
 
       <input type="file" disabled={isUploading} onChange={addHero} className="mb-10" />
 
-      {/* GALLERY */}
       <h3 className="text-lg mb-4">Gallery Images (Max 16)</h3>
 
       <table className="w-full border mb-6">
@@ -256,7 +239,6 @@ const WorkshopsCMS = () => {
               <td className="border p-2 text-center">
                 <input type="file" disabled={isUploading} onChange={(e) => replaceGallery(img.id, e)} />
               </td>
-              
             </tr>
           ))}
         </tbody>
@@ -264,7 +246,6 @@ const WorkshopsCMS = () => {
 
       <input type="file" disabled={isUploading} onChange={addGallery} className="mb-10" />
 
-      {/* TYPES */}
       <h3 className="text-lg mb-4">Workshop Types (Max 2)</h3>
 
       {types.map((type) => (
@@ -325,8 +306,6 @@ const WorkshopsCMS = () => {
           >
             Save
           </button>
-
-          
 
         </div>
       ))}

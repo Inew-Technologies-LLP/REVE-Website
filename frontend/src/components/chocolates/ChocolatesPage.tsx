@@ -12,13 +12,15 @@ type Product = {
 
 export default function ChocolateBarPage() {
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [showAllBars, setShowAllBars] = useState(false);
 
   useEffect(() => {
     const fetchChocolates = async () => {
-      const res = await fetch("http://localhost:5000/chocolates");
+      const res = await fetch(`${BASE_URL}/chocolates`);
       const data = await res.json();
       setProducts(data);
     };
@@ -156,9 +158,7 @@ function ProductCard({
       <h4 className="font-semibold">{product.name}</h4>
 
       {product.category === "Bar" && (
-        <>
-          <p className="text-sm">{product.variant}</p>
-        </>
+        <p className="text-sm">{product.variant}</p>
       )}
 
       {product.category === "Brittle" && (

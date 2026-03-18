@@ -9,12 +9,14 @@ interface ImageItem {
 
 export default function WorkshopsHero() {
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const [images, setImages] = useState<ImageItem[]>([]);
 
   // ✅ FETCH HERO IMAGES
   useEffect(() => {
     const fetchImages = async () => {
-      const res = await fetch("http://localhost:5000/workshops-hero");
+      const res = await fetch(`${BASE_URL}/workshops-hero`);
       const data = await res.json();
       setImages(data);
     };

@@ -7,19 +7,20 @@ interface ImageItem{
 
 const HamperCMS = () => {
 
+  const BASE_URL = import.meta.env.VITE_API_URL
+
   const [heroImages,setHeroImages] = useState<ImageItem[]>([])
   const [galleryImages,setGalleryImages] = useState<ImageItem[]>([])
 
-  // 🔥 NEW: uploading state
   const [isUploading,setIsUploading] = useState(false)
 
   const fetchHamper = async()=>{
 
-    const heroRes = await fetch("http://localhost:5000/hamper-hero")
+    const heroRes = await fetch(`${BASE_URL}/hamper-hero`)
     const heroData = await heroRes.json()
     setHeroImages(heroData)
 
-    const galleryRes = await fetch("http://localhost:5000/hamper-gallery")
+    const galleryRes = await fetch(`${BASE_URL}/hamper-gallery`)
     const galleryData = await galleryRes.json()
     setGalleryImages(galleryData)
 
@@ -37,7 +38,7 @@ const HamperCMS = () => {
       const formData = new FormData()
       formData.append("image",file)
 
-      const res = await fetch("http://localhost:5000/upload-image",{
+      const res = await fetch(`${BASE_URL}/upload-image`,{
         method:"POST",
         body:formData
       })
@@ -59,7 +60,7 @@ const HamperCMS = () => {
 
     const url = await uploadImage(file)
 
-    await fetch("http://localhost:5000/hamper-hero",{
+    await fetch(`${BASE_URL}/hamper-hero`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -78,7 +79,7 @@ const HamperCMS = () => {
 
     const url = await uploadImage(file)
 
-    await fetch("http://localhost:5000/hamper-gallery",{
+    await fetch(`${BASE_URL}/hamper-gallery`,{
       method:"POST",
       headers:{
         "Content-Type":"application/json"
@@ -97,7 +98,7 @@ const HamperCMS = () => {
 
     const url = await uploadImage(file)
 
-    await fetch(`http://localhost:5000/hamper-hero/${id}`,{
+    await fetch(`${BASE_URL}/hamper-hero/${id}`,{
       method:"PUT",
       headers:{
         "Content-Type":"application/json"
@@ -116,7 +117,7 @@ const HamperCMS = () => {
 
     const url = await uploadImage(file)
 
-    await fetch(`http://localhost:5000/hamper-gallery/${id}`,{
+    await fetch(`${BASE_URL}/hamper-gallery/${id}`,{
       method:"PUT",
       headers:{
         "Content-Type":"application/json"
@@ -128,8 +129,6 @@ const HamperCMS = () => {
 
   }
 
-  
-
   return(
 
     <div>
@@ -138,14 +137,11 @@ const HamperCMS = () => {
         Hamper CMS
       </h2>
 
-      {/* 🔥 Uploading indicator */}
       {isUploading && (
         <p className="text-blue-600 mb-4">
           Uploading...
         </p>
       )}
-
-      {/* HERO */}
 
       <h3 className="text-lg mb-4">
         Hero Images
@@ -158,7 +154,6 @@ const HamperCMS = () => {
             <th className="border p-2">No.</th>
             <th className="border p-2">Preview</th>
             <th className="border p-2">Update</th>
-            
           </tr>
         </thead>
 
@@ -187,8 +182,6 @@ const HamperCMS = () => {
                 />
               </td>
 
-              
-
             </tr>
 
           ))}
@@ -197,16 +190,12 @@ const HamperCMS = () => {
 
       </table>
 
-      {/* ADD HERO */}
-
       <input
         type="file"
         disabled={isUploading}
         onChange={addHero}
         className="mb-10"
       />
-
-      {/* GALLERY */}
 
       <h3 className="text-lg mb-4">
         Gallery Images
@@ -219,7 +208,6 @@ const HamperCMS = () => {
             <th className="border p-2">No.</th>
             <th className="border p-2">Preview</th>
             <th className="border p-2">Update</th>
-            
           </tr>
         </thead>
 
@@ -248,7 +236,6 @@ const HamperCMS = () => {
                 />
               </td>
 
-              
             </tr>
 
           ))}

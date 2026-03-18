@@ -10,10 +10,11 @@ interface Chocolate {
 
 const ChocolatesCMS = () => {
 
+  const BASE_URL = import.meta.env.VITE_API_URL
+
   const [chocolates,setChocolates] = useState<Chocolate[]>([])
   const [editingId,setEditingId] = useState<number | null>(null)
 
-  // ✅ single image
   const [image,setImage] = useState<string | File | null>(null)
 
   const [form,setForm] = useState({
@@ -26,7 +27,7 @@ const ChocolatesCMS = () => {
   const [isUploading,setIsUploading] = useState(false)
 
   const fetchChocolates = async () => {
-    const res = await fetch("http://localhost:5000/chocolates")
+    const res = await fetch(`${BASE_URL}/chocolates`)
     const data = await res.json()
     setChocolates(data)
   }
@@ -40,7 +41,6 @@ const ChocolatesCMS = () => {
     setForm({...form,[name]: value})
   }
 
-  // ✅ upload single image
   const uploadSingleImage = (file: File): Promise<string> => {
     return new Promise((resolve,reject)=>{
 
@@ -48,7 +48,7 @@ const ChocolatesCMS = () => {
       formData.append("image", file)
 
       const xhr = new XMLHttpRequest()
-      xhr.open("POST","http://localhost:5000/upload-image")
+      xhr.open("POST",`${BASE_URL}/upload-image`)
 
       xhr.onload = ()=>{
         if(xhr.status === 200){
@@ -86,8 +86,8 @@ const ChocolatesCMS = () => {
       }
 
       const url = editingId
-        ? `http://localhost:5000/chocolates/${editingId}`
-        : `http://localhost:5000/chocolates`
+        ? `${BASE_URL}/chocolates/${editingId}`
+        : `${BASE_URL}/chocolates`
 
       const method = editingId ? "PUT" : "POST"
 
@@ -102,7 +102,6 @@ const ChocolatesCMS = () => {
         })
       })
 
-      // reset
       setForm({name:"",variant:"",category:""})
       setImage(null)
       setEditingId(null)
@@ -119,7 +118,7 @@ const ChocolatesCMS = () => {
   const deleteChocolate = async (id:number) => {
     if(!confirm("Delete?")) return
 
-    await fetch(`http://localhost:5000/chocolates/${id}`,{
+    await fetch(`${BASE_URL}/chocolates/${id}`,{
       method:"DELETE"
     })
 
@@ -136,7 +135,6 @@ const ChocolatesCMS = () => {
       category:item.category
     })
 
-    // ✅ load single image
     setImage(item.image_url)
   }
 
@@ -189,7 +187,6 @@ const ChocolatesCMS = () => {
           className="border p-2"
         />
 
-        {/* ✅ SINGLE IMAGE */}
         <div className="relative w-20 h-20 border">
 
           {image ? (

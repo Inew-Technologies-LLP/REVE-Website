@@ -25,6 +25,8 @@ const categories = [
 
 export default function CakesPage({}: any) {
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const [products, setProducts] = useState<Product[]>([]);
   const [search, setSearch] = useState("");
   const [egglessOnly, setEgglessOnly] = useState(false);
@@ -36,7 +38,7 @@ export default function CakesPage({}: any) {
 
   useEffect(() => {
     const fetchCakes = async () => {
-      const res = await fetch("http://localhost:5000/cakes");
+      const res = await fetch(`${BASE_URL}/cakes`);
       const data = await res.json();
       setProducts(data);
     };

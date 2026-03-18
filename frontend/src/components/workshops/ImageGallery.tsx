@@ -10,6 +10,8 @@ interface ImageItem {
 
 export default function HamperGallery() {
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+    
   const [images, setImages] = useState<ImageItem[]>([]);
   const [index, setIndex] = useState(0);
   const [visibleCards, setVisibleCards] = useState(4);
@@ -20,7 +22,7 @@ export default function HamperGallery() {
   // ✅ FETCH FROM DB
   useEffect(() => {
     const fetchImages = async () => {
-      const res = await fetch("http://localhost:5000/workshops-gallery");
+      const res = await fetch(`${BASE_URL}/workshops-gallery`);
       const data = await res.json();
       setImages(data);
     };

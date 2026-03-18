@@ -12,10 +12,11 @@ interface Cake {
 
 const CakesCMS = () => {
 
+  const BASE_URL = import.meta.env.VITE_API_URL
+
   const [cakes,setCakes] = useState<Cake[]>([])
   const [editingId,setEditingId] = useState<number | null>(null)
 
-  // 🔥 unified images state
   const [images,setImages] = useState<(string | File | null)[]>([])
 
   const [form,setForm] = useState({
@@ -30,7 +31,7 @@ const CakesCMS = () => {
   const [isUploading,setIsUploading] = useState(false)
 
   const fetchCakes = async () => {
-    const res = await fetch("http://localhost:5000/cakes")
+    const res = await fetch(`${BASE_URL}/cakes`)
     const data = await res.json()
     setCakes(data)
   }
@@ -48,7 +49,6 @@ const CakesCMS = () => {
     })
   }
 
-  // 🔥 upload single
   const uploadSingleImage = (file: File): Promise<string> => {
     return new Promise((resolve,reject)=>{
 
@@ -56,7 +56,7 @@ const CakesCMS = () => {
       formData.append("image", file)
 
       const xhr = new XMLHttpRequest()
-      xhr.open("POST","http://localhost:5000/upload-image")
+      xhr.open("POST",`${BASE_URL}/upload-image`)
 
       xhr.onload = ()=>{
         if(xhr.status === 200){
@@ -70,14 +70,12 @@ const CakesCMS = () => {
     })
   }
 
-  // 🔥 replace image
   const handleImageChange = (file:File,index:number) => {
     const updated = [...images]
     updated[index] = file
     setImages(updated)
   }
 
-  // 🔥 delete image
   const removeImage = (index:number) => {
     const updated = [...images]
     updated[index] = null
@@ -112,8 +110,8 @@ const CakesCMS = () => {
       }
 
       const url = editingId
-        ? `http://localhost:5000/cakes/${editingId}`
-        : `http://localhost:5000/cakes`
+        ? `${BASE_URL}/cakes/${editingId}`
+        : `${BASE_URL}/cakes`
 
       const method = editingId ? "PUT" : "POST"
 
@@ -128,7 +126,6 @@ const CakesCMS = () => {
         })
       })
 
-      // reset
       setForm({
         name:"",
         variant:"",
@@ -152,7 +149,7 @@ const CakesCMS = () => {
   const deleteCake = async (id:number) => {
     if(!confirm("Delete this cake?")) return
 
-    await fetch(`http://localhost:5000/cakes/${id}`,{
+    await fetch(`${BASE_URL}/cakes/${id}`,{
       method:"DELETE"
     })
 
@@ -171,7 +168,6 @@ const CakesCMS = () => {
       description:cake.description || ""
     })
 
-    // 🔥 load existing images
     setImages(cake.image_url || [])
   }
 
@@ -242,7 +238,6 @@ const CakesCMS = () => {
           />
         </label>
 
-        {/* 🔥 IMAGE SLOTS */}
         <div className="flex gap-3 flex-wrap">
 
           {[0,1,2].map((i)=>{

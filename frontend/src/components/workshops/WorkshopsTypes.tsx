@@ -11,12 +11,14 @@ interface WorkshopType {
 
 export default function WorkshopTypes() {
 
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
   const [types, setTypes] = useState<WorkshopType[]>([])
 
   useEffect(() => {
 
     const fetchTypes = async () => {
-      const res = await fetch("http://localhost:5000/workshops-types")
+      const res = await fetch(`${BASE_URL}/workshops-types`);
       const data = await res.json()
       setTypes(data)
     }
