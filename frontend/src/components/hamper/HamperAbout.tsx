@@ -1,5 +1,5 @@
 import bestsellersBg from "../../assets/bestsellersbg.png";
-import chefImage from "../../assets/hamper-gallery/hamper.jpg";
+import chefImage from "../../assets/hamper-gallery/Hamper.jpg";
 
 export default function HamperAbout() {
   return (
