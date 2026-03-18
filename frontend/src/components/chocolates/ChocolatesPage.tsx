@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import cakeBg from "../../assets/cakebg.png";
+import cakeBg from "../../assets/CakeBG.png";
 import searchIcon from "../../assets/search.svg";
 
 type Product = {
