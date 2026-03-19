@@ -9,7 +9,7 @@ const ProtectedRoute = ({children}:Props) => {
   const isAuth = sessionStorage.getItem("adminAuth")
 
   if(isAuth !== "true"){
-    return <Navigate to="/admin/login" replace />
+    return <Navigate to="/admin" replace />
   }
 
   return <>{children}</>
