@@ -90,10 +90,18 @@ app.get("/cakes", (req, res) => {
 })
 
 
-// ADD CAKE
 app.post("/cakes", (req, res) => {
 
   const { name, category, eggless, image_url, description } = req.body;
+
+  // ✅ ensure array
+  let images = []
+
+  if (Array.isArray(image_url)) {
+    images = image_url
+  } else if (typeof image_url === "string" && image_url.trim() !== "") {
+    images = [image_url]
+  }
 
   const sql = `
     INSERT INTO cakes (name, category, eggless, image_url, description)
@@ -102,7 +110,13 @@ app.post("/cakes", (req, res) => {
 
   db.query(
     sql,
-    [name, category, eggless, image_url, description],
+    [
+      name,
+      category,
+      eggless,
+      JSON.stringify(images), // ✅ FIX HERE
+      description
+    ],
     (err, result) => {
       if (err) {
         console.log(err);

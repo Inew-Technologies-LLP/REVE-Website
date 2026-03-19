@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import CakesCMS from "./CakesCMS"
 import ChocolatesCMS from "./ChocolatesCMS"
 import HamperCMS from "./HamperCMS"
@@ -7,18 +7,6 @@ import WorkshopsCMS from "./WorkshopsCMS"
 const AdminDashboard = () => {
 
   const [activeTab,setActiveTab] = useState("cakes")
-
-  // ✅ logout on refresh only
-  useEffect(() => {
-
-    const navEntries = performance.getEntriesByType("navigation") as PerformanceNavigationTiming[]
-
-    if (navEntries.length > 0 && navEntries[0].type === "reload") {
-      sessionStorage.removeItem("adminAuth")
-      window.location.href = "/admin/login"
-    }
-
-  }, [])
 
   const logout = ()=>{
     sessionStorage.removeItem("adminAuth")

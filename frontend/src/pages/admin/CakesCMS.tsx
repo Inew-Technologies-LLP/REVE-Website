@@ -28,6 +28,7 @@ const CakesCMS = () => {
   const [search,setSearch] = useState("")
   const [isUploading,setIsUploading] = useState(false)
 
+  // ================= FETCH =================
   const fetchCakes = async () => {
     const res = await fetch(`${BASE_URL}/cakes`)
     const data = await res.json()
@@ -38,6 +39,7 @@ const CakesCMS = () => {
     fetchCakes()
   },[])
 
+  // ================= INPUT =================
   const handleChange = (e:any) => {
     const {name,value,type,checked} = e.target
 
@@ -47,6 +49,7 @@ const CakesCMS = () => {
     })
   }
 
+  // ================= UPLOAD =================
   const uploadSingleImage = (file: File): Promise<string> => {
     return new Promise((resolve,reject)=>{
 
@@ -59,16 +62,27 @@ const CakesCMS = () => {
       xhr.onload = ()=>{
         if(xhr.status === 200){
           const data = JSON.parse(xhr.responseText)
-          resolve(data.url)
-        } else reject()
+          if(data.url){
+            resolve(data.url)
+          } else {
+            reject("Invalid response")
+          }
+        } else reject("Upload failed")
       }
 
-      xhr.onerror = ()=>reject()
+      xhr.onerror = ()=>reject("Network error")
       xhr.send(formData)
     })
   }
 
+  // ================= IMAGE HANDLING =================
   const handleImageChange = (file:File,index:number) => {
+
+    if(images.filter(i => i !== null).length >= 3){
+      alert("Max 3 images allowed")
+      return
+    }
+
     const updated = [...images]
     updated[index] = file
     setImages(updated)
@@ -80,6 +94,7 @@ const CakesCMS = () => {
     setImages(updated)
   }
 
+  // ================= SUBMIT =================
   const handleSubmit = async (e:any) => {
 
     e.preventDefault()
@@ -97,7 +112,7 @@ const CakesCMS = () => {
 
       for(let img of images){
 
-        if(img === null) continue
+        if(!img) continue
 
         if(typeof img === "string"){
           finalImages.push(img)
@@ -106,6 +121,9 @@ const CakesCMS = () => {
           finalImages.push(url)
         }
       }
+
+      // ✅ IMPORTANT: avoid sending invalid JSON
+      finalImages = finalImages.filter(Boolean)
 
       const url = editingId
         ? `${BASE_URL}/cakes/${editingId}`
@@ -120,10 +138,11 @@ const CakesCMS = () => {
         },
         body: JSON.stringify({
           ...form,
-          image_url: finalImages
+          image_url: finalImages // ✅ always array
         })
       })
 
+      // RESET
       setForm({
         name:"",
         category:"",
@@ -136,13 +155,15 @@ const CakesCMS = () => {
 
       fetchCakes()
 
-    } catch {
-      alert("Something went wrong")
+    } catch (err) {
+      console.log(err)
+      alert("Upload failed")
     } finally {
       setIsUploading(false)
     }
   }
 
+  // ================= DELETE =================
   const deleteCake = async (id:number) => {
     if(!confirm("Delete this cake?")) return
 
@@ -153,6 +174,7 @@ const CakesCMS = () => {
     fetchCakes()
   }
 
+  // ================= EDIT =================
   const editCake = (cake:Cake) => {
 
     setEditingId(cake.id)
@@ -178,6 +200,12 @@ const CakesCMS = () => {
         Cakes CMS
       </h2>
 
+      {isUploading && (
+        <p className="text-blue-600 mb-4">
+          Uploading...
+        </p>
+      )}
+
       <input
         type="text"
         placeholder="Search cakes..."
@@ -198,8 +226,6 @@ const CakesCMS = () => {
           onChange={handleChange}
           className="border p-2"
         />
-
-        
 
         <input
           name="category"
@@ -228,6 +254,7 @@ const CakesCMS = () => {
           />
         </label>
 
+        {/* IMAGE SLOTS */}
         <div className="flex gap-3 flex-wrap">
 
           {[0,1,2].map((i)=>{
@@ -235,7 +262,6 @@ const CakesCMS = () => {
             const img = images[i]
 
             return (
-
               <div key={i} className="relative w-20 h-20 border">
 
                 {img ? (
@@ -269,7 +295,6 @@ const CakesCMS = () => {
                 )}
 
               </div>
-
             )
           })}
 
@@ -288,6 +313,7 @@ const CakesCMS = () => {
 
       </form>
 
+      {/* TABLE */}
       <table className="w-full border">
 
         <thead>
@@ -295,7 +321,6 @@ const CakesCMS = () => {
             <th className="p-3 border">ID</th>
             <th className="p-3 border">Name</th>
             <th className="p-3 border">Category</th>
-           
             <th className="p-3 border">Eggless</th>
             <th className="p-3 border">Description</th>
             <th className="p-3 border">Images</th>
@@ -312,7 +337,6 @@ const CakesCMS = () => {
               <td className="p-3 border">{cake.id}</td>
               <td className="p-3 border">{cake.name}</td>
               <td className="p-3 border">{cake.category}</td>
-              
               <td className="p-3 border">{cake.eggless ? "Yes" : "No"}</td>
 
               <td className="p-3 border max-w-[200px] truncate">
