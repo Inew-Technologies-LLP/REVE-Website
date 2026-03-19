@@ -10,7 +10,7 @@ const AdminDashboard = () => {
 
   const logout = ()=>{
     sessionStorage.removeItem("adminAuth")
-    window.location.href="/admin/login"
+    window.location.href="/admin"
   }
 
   return (

@@ -26,7 +26,7 @@ const AppRoutes = () => {
       <Route path="/hamper" element={<Hamper />} />
       <Route path="/contact" element={<Contact />} />
 
-      <Route path="/admin/login" element={<AdminLogin />} />
+      <Route path="/admin" element={<AdminLogin />} />
 
       <Route
         path="/admin/dashboard"
