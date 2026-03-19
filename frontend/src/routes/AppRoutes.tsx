@@ -12,6 +12,7 @@ import AdminLogin from "../pages/AdminLogin";
 import AdminDashboard from "../pages/admin/AdminDashboard";
 
 import ProtectedRoute from "../components/ProtectedRoute";
+import NotFound from "../pages/NotFound";
 
 const AppRoutes = () => {
   return (
@@ -27,6 +28,7 @@ const AppRoutes = () => {
       <Route path="/contact" element={<Contact />} />
 
       <Route path="/admin" element={<AdminLogin />} />
+      <Route path="*" element={<NotFound />} />
 
       <Route
         path="/admin/dashboard"
