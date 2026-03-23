@@ -1,4 +1,5 @@
 import { BrowserRouter } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import Navbar from "./components/layout/Navbar";
 import AppRoutes from "./routes/AppRoutes";
 import ScrollToTop from "./scrolltotop";
@@ -11,6 +12,7 @@ function App() {
       <Navbar />
       <AppRoutes />
       <ScrollTopButton />
+      <Analytics />
     </BrowserRouter>
   );
 }
