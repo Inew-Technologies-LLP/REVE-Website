@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import heroImage from "../../assets/homebanner.png";
+import heroImage from "../../assets/reve.png";
 import logo from "../../assets/logo1.png";
 
 const Hero = () => {
@@ -7,17 +7,17 @@ const Hero = () => {
     <section className="relative w-full min-h-screen overflow-hidden">
 
       {/* Background Image */}
-      <img
-  src={heroImage}
-  alt="Hero Background"
-  className="absolute inset-0 w-full h-full object-cover scale-125 origin-right opacity-90  -translate-y-20 "
+     <img  
+  src={heroImage}  
+  alt="Hero Background"  
+  className="absolute inset-0 w-full h-full object-cover scale-125 origin-right opacity-90 -translate-y-20"
 />
 
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/30"></div>
 
       {/* Content */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-white px-6 sm:px-10 md:px-16 lg:-mr-20 lg:items-end">
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-center text-white px-6 sm:px-10 md:px-8 lg:-mr-20 lg:items-end">
 
         {/* Inner Wrapper (keeps everything centered) */}
         <div className="flex flex-col items-center text-center">
