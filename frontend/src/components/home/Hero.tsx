@@ -10,7 +10,7 @@ const Hero = () => {
      <img  
   src={heroImage}  
   alt="Hero Background"  
-  className="absolute inset-0 w-full h-full object-cover scale-125 origin-right opacity-90 -translate-y-20"
+  className="absolute inset-0 w-full h-full object-cover origin-right opacity-90 "
 />
 
       {/* Overlay */}
