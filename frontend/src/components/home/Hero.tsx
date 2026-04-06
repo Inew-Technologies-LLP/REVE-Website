@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import heroImage from "../../assets/reve.png";
-import logo from "../../assets/logo1.png";
+import logo from "../../assets/whitelogo.png";
 
 const Hero = () => {
   return (
@@ -26,7 +26,7 @@ const Hero = () => {
           <img
             src={logo}
             alt="Reve Patisserie"
-            className="mb-8 w-[320px] sm:w-[360px] md:w-[460px] lg:w-[532px] h-auto"
+            className="mb-8 w-[320px] sm:w-[360px] md:w-[460px] lg:w-[450px] h-auto"
           />
 
           {/* Tagline */}
