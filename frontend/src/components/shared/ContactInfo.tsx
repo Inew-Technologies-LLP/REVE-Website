@@ -18,17 +18,17 @@ export default function ContactInfo() {
               <h3 className="text-lg sm:text-xl lg:text-2xl font-bold font-['Roboto'] mb-3">
                 Open hours
               </h3>
-                <div className="space-y-9">
-              <p className="text-sm sm:text-base font-normal font-['Roboto'] leading-6 max-w-xs">
-                The restaurant hours are<br />
+                <div className="space-y-3">
+              <p className="text-sm sm:text-base font-normal font-['Roboto'] leading-6 max-w-[200px]">
+                The restaurant hours for<br /> Kalyani Nagar are<br />
                 9.00 am - 5.00 pm<br />
                 Tuesday closed
               </p>
 
              
 
-              <p className="text-sm sm:text-base font-normal font-['Roboto'] leading-6 max-w-xs">
-                The restaurant hours are<br />
+              <p className="text-sm sm:text-base font-normal font-['Roboto'] leading-6 max-w-[200px]">
+                The restaurant hours for Koregaon Park are<br />
                 11.30 am - 8.30 pm<br />
                 Tuesday closed
               </p>
