@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import workshopBg from "../../assets/workshopbg1.png";
 import { Link } from "react-router-dom";
+import LazyImage from "../../components/LazyImage";
+
 
 interface ImageItem {
   id: number;
@@ -100,7 +102,7 @@ export default function WorkshopsHero() {
               <div className="flex gap-4 sm:gap-6 animate-scroll-left min-w-max">
 
                 {[...topImages, ...topImages].map((img, i) => (
-                  <img
+                  <LazyImage
                     key={"top-" + i}
                     src={img.image_url}
                     alt="Workshop"
@@ -120,7 +122,7 @@ export default function WorkshopsHero() {
               <div className="flex gap-4 sm:gap-6 animate-scroll-right min-w-max">
 
                 {[...bottomImages, ...bottomImages].map((img, i) => (
-                  <img
+                  <LazyImage
                     key={"bottom-" + i}
                     src={img.image_url}
                     alt="Workshop"

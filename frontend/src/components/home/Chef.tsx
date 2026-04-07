@@ -1,5 +1,7 @@
-import chefImg from "../../assets/chef.jpg";
+import chefImg from "../../assets/chef.webp";
 import chefBg from "../../assets/chefbg.png";
+import LazyImage from "../../components/LazyImage";
+
 
 export default function Chef() {
   return (
@@ -88,7 +90,7 @@ export default function Chef() {
         <div className="hidden md:block w-full max-w-[500px] 
                         h-[360px] lg:h-[500px]
                         overflow-hidden mx-auto md:mx-0">
-          <img
+          <LazyImage
             src={chefImg}
             alt="Chef Aanchal Sapra"
             className="w-full h-full object-cover object-center"

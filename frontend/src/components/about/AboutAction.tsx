@@ -1,6 +1,8 @@
 import actionBg1 from "../../assets/action1.png";
 import actionBg2 from "../../assets/action2.png";
-import store from "../../assets/store.jpg";
+import store from "../../assets/store.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 export default function AboutAction() {
   return (
@@ -63,7 +65,7 @@ export default function AboutAction() {
 
         {/* Bottom Image */}
         <div className="mt-14">
-          <img
+          <LazyImage
             src={store}
             alt="Rêve Action"
             className="w-full h-auto object-cover rounded-lg"

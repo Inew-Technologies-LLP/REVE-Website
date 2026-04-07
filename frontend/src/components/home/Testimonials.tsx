@@ -1,11 +1,13 @@
 import testimonialsBg from "../../assets/testimonials.png";
 
-import img1 from "../../assets/testimonials/1.jpg";
-import img2 from "../../assets/testimonials/2.jpg";
-import img3 from "../../assets/testimonials/3.jpg";
-import img4 from "../../assets/testimonials/4.jpg";
-import img5 from "../../assets/testimonials/5.jpg";
-import img6 from "../../assets/testimonials/6.jpg";
+import img1 from "../../assets/testimonials/1.webp";
+import img2 from "../../assets/testimonials/2.webp";
+import img3 from "../../assets/testimonials/3.webp";
+import img4 from "../../assets/testimonials/4.webp";
+import img5 from "../../assets/testimonials/5.webp";
+import img6 from "../../assets/testimonials/6.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 export default function Testimonials() {
 
@@ -32,7 +34,7 @@ export default function Testimonials() {
             key={index}
             className="bg-white border border-black overflow-hidden"
           >
-            <img
+            <LazyImage
               src={img}
               alt={`testimonial-${index + 1}`}
               className="w-full h-full object-cover"

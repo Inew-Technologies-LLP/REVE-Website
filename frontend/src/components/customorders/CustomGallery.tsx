@@ -2,22 +2,24 @@ import { useState, useEffect, useRef } from "react";
 import leftArrow from "../../assets/left.svg";
 import rightArrow from "../../assets/right.svg";
 
-import img1 from "../../assets/custom-gallery/1.jpg";
-import img2 from "../../assets/custom-gallery/2.jpg";
-import img3 from "../../assets/custom-gallery/3.jpg";
-import img4 from "../../assets/custom-gallery/4.jpg";
-import img5 from "../../assets/custom-gallery/5.jpg";
-import img6 from "../../assets/custom-gallery/6.jpg";
-import img7 from "../../assets/custom-gallery/7.jpg";
-import img8 from "../../assets/custom-gallery/8.jpg";
-import img9 from "../../assets/custom-gallery/9.jpg";
-import img10 from "../../assets/custom-gallery/10.jpg";
-import img11 from "../../assets/custom-gallery/11.jpg";
-import img12 from "../../assets/custom-gallery/12.jpg";
-import img13 from "../../assets/custom-gallery/13.jpg";
-import img14 from "../../assets/custom-gallery/14.jpg";
-import img15 from "../../assets/custom-gallery/15.jpg";
-import img16 from "../../assets/custom-gallery/16.jpg";
+import img1 from "../../assets/custom-gallery/1.webp";
+import img2 from "../../assets/custom-gallery/2.webp";
+import img3 from "../../assets/custom-gallery/3.webp";
+import img4 from "../../assets/custom-gallery/4.webp";
+import img5 from "../../assets/custom-gallery/5.webp";
+import img6 from "../../assets/custom-gallery/6.webp";
+import img7 from "../../assets/custom-gallery/7.webp";
+import img8 from "../../assets/custom-gallery/8.webp";
+import img9 from "../../assets/custom-gallery/9.webp";
+import img10 from "../../assets/custom-gallery/10.webp";
+import img11 from "../../assets/custom-gallery/11.webp";
+import img12 from "../../assets/custom-gallery/12.webp";
+import img13 from "../../assets/custom-gallery/13.webp";
+import img14 from "../../assets/custom-gallery/14.webp";
+import img15 from "../../assets/custom-gallery/15.webp";
+import img16 from "../../assets/custom-gallery/16.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 import { Link } from "react-router-dom";
 
@@ -134,7 +136,7 @@ export default function HamperGallery() {
                   }}
                   className="bg-gray-300"
                 >
-                  <img
+                  <LazyImage
                     src={img}
                     alt="Gallery"
                     className="w-full h-full object-fit"

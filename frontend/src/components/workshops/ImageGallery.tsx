@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import leftArrow from "../../assets/left.svg";
 import rightArrow from "../../assets/right.svg";
 import { Link } from "react-router-dom";
+import LazyImage from "../../components/LazyImage";
+
 
 interface ImageItem {
   id: number;
@@ -123,7 +125,7 @@ export default function HamperGallery() {
                     flexShrink: 0,
                   }}
                 >
-                  <img
+                  <LazyImage
                     src={img.image_url}
                     alt="Gallery"
                     className="w-full h-full object-cover"

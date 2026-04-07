@@ -1,5 +1,7 @@
 import bestsellersBg from "../../assets/bestsellersbg.png";
-import chefImage from "../../assets/hamper-gallery/Hamper.jpg";
+import chefImage from "../../assets/hamper-gallery/Hamper.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 export default function HamperAbout() {
   return (
@@ -52,7 +54,7 @@ export default function HamperAbout() {
               overflow-hidden
             "
           >
-            <img
+            <LazyImage
               src={chefImage}
               alt="Chef Aanchal Sapra"
               className="w-full h-full object-cover"

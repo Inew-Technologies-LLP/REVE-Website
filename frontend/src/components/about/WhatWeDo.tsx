@@ -2,10 +2,12 @@ import { Link } from "react-router-dom";
 import blogBg from "../../assets/aboutbg2.png";
 import waveBg from "../../assets/wave3.png";
 
-import cakeImg from "../../assets/crafted/cake.jpg";
-import chocolateImg from "../../assets/crafted/chocolate.jpg";
-import customImg from "../../assets/crafted/custom.jpg";
-import workshopImg from "../../assets/crafted/workshop.jpg";
+import cakeImg from "../../assets/crafted/cake.webp";
+import chocolateImg from "../../assets/crafted/chocolate.webp";
+import customImg from "../../assets/crafted/custom.webp";
+import workshopImg from "../../assets/crafted/workshop.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 export default function WhatWeDo() {
   return (
@@ -95,7 +97,7 @@ function Card({
   return (
     <div>
       <div className="w-full aspect-[350/300] overflow-hidden rounded-lg">
-        <img
+        <LazyImage
           src={image}
           alt={title}
           className="w-full h-full object-cover"

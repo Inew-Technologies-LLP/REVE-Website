@@ -3,31 +3,33 @@ import { useState } from "react";
 import customBg from "../../assets/custombg1.png";
 
 // MAIN IMAGES
-import wedding from "../../assets/custom-what/wedding.jpg";
-import floral from "../../assets/custom-what/floral.jpg";
-import baby from "../../assets/custom-what/baby-shower.jpg";
-import children from "../../assets/custom-what/children.jpg";
+import wedding from "../../assets/custom-what/wedding.webp";
+import floral from "../../assets/custom-what/floral.webp";
+import baby from "../../assets/custom-what/baby-shower.webp";
+import children from "../../assets/custom-what/children.webp";
 
 // THUMBNAILS
-import wedding1 from "../../assets/custom-what/wedding1.jpg";
-import wedding2 from "../../assets/custom-what/wedding2.jpg";
-import wedding3 from "../../assets/custom-what/wedding3.jpg";
-import wedding4 from "../../assets/custom-what/wedding4.jpg";
+import wedding1 from "../../assets/custom-what/wedding1.webp";
+import wedding2 from "../../assets/custom-what/wedding2.webp";
+import wedding3 from "../../assets/custom-what/wedding3.webp";
+import wedding4 from "../../assets/custom-what/wedding4.webp";
 
-import floral1 from "../../assets/custom-what/floral1.jpg";
-import floral2 from "../../assets/custom-what/floral2.jpg";
-import floral3 from "../../assets/custom-what/floral3.jpg";
-import floral4 from "../../assets/custom-what/floral4.jpg";
+import floral1 from "../../assets/custom-what/floral1.webp";
+import floral2 from "../../assets/custom-what/floral2.webp";
+import floral3 from "../../assets/custom-what/floral3.webp";
+import floral4 from "../../assets/custom-what/floral4.webp";
 
-import baby1 from "../../assets/custom-what/baby-shower1.jpg";
-import baby2 from "../../assets/custom-what/baby-shower2.jpg";
-import baby3 from "../../assets/custom-what/baby-shower3.jpg";
-import baby4 from "../../assets/custom-what/baby-shower4.jpg";
+import baby1 from "../../assets/custom-what/baby-shower1.webp";
+import baby2 from "../../assets/custom-what/baby-shower2.webp";
+import baby3 from "../../assets/custom-what/baby-shower3.webp";
+import baby4 from "../../assets/custom-what/baby-shower4.webp";
 
-import children1 from "../../assets/custom-what/children1.jpg";
-import children2 from "../../assets/custom-what/children2.jpg";
-import children3 from "../../assets/custom-what/children3.jpg";
-import children4 from "../../assets/custom-what/children4.jpg";
+import children1 from "../../assets/custom-what/children1.webp";
+import children2 from "../../assets/custom-what/children2.webp";
+import children3 from "../../assets/custom-what/children3.webp";
+import children4 from "../../assets/custom-what/children4.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 const ImageBlock = ({ title, description, defaultImage, images }: any) => {
   const [mainImage, setMainImage] = useState(defaultImage);
@@ -58,10 +60,11 @@ const ImageBlock = ({ title, description, defaultImage, images }: any) => {
         {/* THUMBNAILS */}
         <div className="flex gap-3 mb-5 overflow-x-auto">
           {thumbs.map((img: string, index: number) => (
-            <img
+            <LazyImage
               key={index}
               src={img}
               onClick={() => handleClick(img)}
+              alt="Thumbnail"
               className="w-[70px] h-[70px] object-cover cursor-pointer border hover:opacity-80 transition"
             />
           ))}

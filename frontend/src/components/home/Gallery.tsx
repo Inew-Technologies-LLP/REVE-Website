@@ -1,16 +1,18 @@
-import img1 from "../../assets/gallery/1.jpg";
-import img2 from "../../assets/gallery/2.jpg";
-import img3 from "../../assets/gallery/3.jpg";
-import img4 from "../../assets/gallery/4.jpg";
-import img5 from "../../assets/gallery/5.jpg";
-import img6 from "../../assets/gallery/6.jpg";
+import img2 from "../../assets/gallery/2.webp";
+import img3 from "../../assets/gallery/3.webp";
+import img4 from "../../assets/gallery/4.webp";
+import img1 from "../../assets/gallery/1.webp";
+import img5 from "../../assets/gallery/5.webp";
+import img6 from "../../assets/gallery/6.webp";
 
-import img7 from "../../assets/gallery/7.jpg";
-import img8 from "../../assets/gallery/8.jpg";
-import img9 from "../../assets/gallery/9.jpg";
-import img10 from "../../assets/gallery/10.jpg";
-import img11 from "../../assets/gallery/11.jpg";
-import img12 from "../../assets/gallery/12.jpg";
+import img7 from "../../assets/gallery/7.webp";
+import img8 from "../../assets/gallery/8.webp";
+import img9 from "../../assets/gallery/9.webp";
+import img10 from "../../assets/gallery/10.webp";
+import img11 from "../../assets/gallery/11.webp";
+import img12 from "../../assets/gallery/12.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 import galleryBg from "../../assets/homegallerybg.png";
 
@@ -47,7 +49,7 @@ export default function Gallery() {
         <div className="relative overflow-hidden w-full">
           <div className="flex gap-6 sm:gap-8 animate-marquee w-max">
             {[...topImages, ...topImages].map((img, index) => (
-              <img
+              <LazyImage
                 key={index}
                 src={img}
                 alt="gallery"

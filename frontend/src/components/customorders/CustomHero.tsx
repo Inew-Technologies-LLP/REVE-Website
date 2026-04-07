@@ -1,8 +1,10 @@
 import bestsellersBg from "../../assets/bestsellersbg.png";
 import blogBg from "../../assets/custombg2.png";
-import hero1 from "../../assets/custom-gallery/hero1.jpg"
-import hero2 from "../../assets/custom-gallery/hero2.jpg"
-import hero3 from "../../assets/custom-gallery/hero3.jpg"
+import hero1 from "../../assets/custom-gallery/hero1.webp";
+import hero2 from "../../assets/custom-gallery/hero2.webp";
+import hero3 from "../../assets/custom-gallery/hero3.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 import { Link } from "react-router-dom";
 
@@ -73,17 +75,17 @@ export default function CustomOrdersSection() {
 
           {/* Left Image */}
           <div className="w-full max-w-[348px] aspect-square lg:w-[348px] lg:h-[348px] lg:mt-[240px] bg-gray-300">
-            <img src={hero1} alt="Custom order 1" className="w-full h-full object-cover object-bottom" />
+            <LazyImage src={hero1} alt="Custom order 1" className="w-full h-full object-cover object-bottom" />
           </div>
 
           {/* Center Large Image */}
           <div className="w-full max-w-[520px] aspect-[520/828] lg:w-[520px] lg:h-[828px] bg-gray-300">
-            <img src={hero2} alt="Custom order 2" className="w-full h-full object-cover" />
+            <LazyImage src={hero2} alt="Custom order 2" className="w-full h-full object-cover" />
           </div>
 
           {/* Right Image */}
           <div className="w-full max-w-[348px] aspect-[348/522] lg:w-[348px] lg:h-[522px] bg-gray-300">
-            <img src={hero3} alt="Custom order 3" className="w-full h-full object-cover" />
+            <LazyImage src={hero3} alt="Custom order 3" className="w-full h-full object-cover" />
           </div>
 
         </div>
