@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import cakeBg from "../../assets/CakeBG.png";
 import searchIcon from "../../assets/search.svg";
+import LazyImage from "../LazyImage";
 
 type Product = {
   id: number;
@@ -148,7 +149,7 @@ function ProductCard({
     <div className="text-center">
 
       <div className="w-full max-w-[336px] h-[320px] sm:h-[380px] lg:h-[414px] mx-auto bg-gray-300 mb-4">
-        <img
+        <LazyImage
           src={product.image_url}
           alt={product.name}
           className="w-full h-full object-cover"

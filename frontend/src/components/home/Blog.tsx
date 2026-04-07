@@ -2,9 +2,11 @@ import { Link } from "react-router-dom";
 import blogBg from "../../assets/blog.png";
 import chevronRight from "../../assets/chevron_right.svg";
 
-import cakeImg from "../../assets/H-cake.jpg";
-import chocolateImg from "../../assets/H-chocolate.jpg";
-import workshopImg from "../../assets/H-workshop.jpg";
+import cakeImg from "../../assets/H-cake.webp";
+import chocolateImg from "../../assets/H-chocolate.webp";
+import workshopImg from "../../assets/H-workshop.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 const Blog = () => {
   return (
@@ -78,9 +80,9 @@ function BlogCard({
   return (
     <div className="flex flex-col h-full">
 
-      {/* Image (Replaced Gray Box) */}
+      {/* Image  */}
       <div className="w-full aspect-[407/270] mb-6 overflow-hidden rounded-lg">
-        <img
+        <LazyImage
           src={image}
           alt={title}
           className="w-full h-full object-cover "

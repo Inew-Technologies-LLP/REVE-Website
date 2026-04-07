@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 import workshopBg from "../../assets/workshopbg2.png";
+import LazyImage from "../../components/LazyImage";
+
 
 interface WorkshopType {
   id: number
@@ -67,7 +69,7 @@ export default function WorkshopTypes() {
                     : "h-[260px] sm:h-[400px] lg:h-[616px]"
                 } mb-[24px] overflow-hidden`}
               >
-                <img
+                <LazyImage
                   src={type.image_url}
                   alt={type.heading}
                   className="w-full h-full object-cover"

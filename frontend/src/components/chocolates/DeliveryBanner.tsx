@@ -1,4 +1,5 @@
-import chocolateBg from "../../assets/chocolatebg.png";
+import chocolateBg from "../../assets/chocolatebg.webp";
+
 
 export default function DeliveryBanner() {
   return (

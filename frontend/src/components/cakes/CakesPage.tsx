@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import cakeBg from "../../assets/CakeBG.png";
 import searchIcon from "../../assets/search.svg";
-import kunafaImg from "../../assets/kunafa.jpg";
+import kunafaImg from "../../assets/kunafa.webp";
 import icon from "../../assets/icon1.svg";
 import { Link } from "react-router-dom";
+import LazyImage from "../LazyImage";
 
 type Product = {
   id: number;
@@ -238,7 +239,7 @@ function ProductGrid({
         >
 
           <div className="w-full aspect-[251/309] overflow-hidden">
-            <img
+            <LazyImage
               src={product.image_url?.[0]}
               alt={product.name}
               className="w-full h-full object-cover"
@@ -393,8 +394,9 @@ function ProductModal({
                 onClick={() => handleThumbnailClick(img, i)}
                 className="w-[70px] h-[70px] sm:w-[85px] sm:h-[85px] bg-gray-300 overflow-hidden cursor-pointer"
               >
-                <img
+                <LazyImage
                   src={img}
+                  alt="Thumbnail"
                   className="w-full h-full object-cover"
                 />
               </div>

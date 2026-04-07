@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import bestsellersBg from "../../assets/bestsellersbg.png";
 import leftArrow from "../../assets/left.svg";
 import rightArrow from "../../assets/right.svg";
-import img1 from "../../assets/best-sellers/truffle.jpg";
-import img2 from "../../assets/best-sellers/dark-kunafa.png";
-import img3 from "../../assets/best-sellers/almond-toffee.jpg";
-import img4 from "../../assets/best-sellers/coffee-hazelnut.jpg";
-import img5 from "../../assets/best-sellers/gianduja.jpg";
-import img6 from "../../assets/best-sellers/ferrero.jpg";
+import img1 from "../../assets/best-sellers/truffle.webp";
+import img2 from "../../assets/best-sellers/dark-kunafa.webp";
+import img3 from "../../assets/best-sellers/almond-toffee.webp";
+import img4 from "../../assets/best-sellers/coffee-hazelnut.webp";
+import img5 from "../../assets/best-sellers/gianduja.webp";
+import img6 from "../../assets/best-sellers/ferrero.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 const products = [
   {
@@ -193,7 +195,7 @@ function ProductCard({ product }: any) {
             className="absolute inset-0"
             style={{ backfaceVisibility: "hidden" }}
           >
-            <img
+            <LazyImage
               src={product.image}
               alt={product.name}
               className="w-full h-full object-cover"

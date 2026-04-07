@@ -1,5 +1,7 @@
 import chefBg from "../../assets/bestsellersbg.png";
-import chefImg from "../../assets/chef.jpg";
+import chefImg from "../../assets/chef.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 export default function Chef() {
   return (
@@ -27,7 +29,7 @@ export default function Chef() {
 
           {/* Image (Mobile Only Placement) */}
           <div className="order-1 md:hidden w-full h-[380px] overflow-hidden mb-8">
-            <img
+            <LazyImage
               src={chefImg}
               alt="Chef Aanchal Sapra"
               className="w-full h-full object-cover object-center"

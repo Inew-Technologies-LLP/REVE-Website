@@ -2,11 +2,13 @@ import { useState, useEffect } from "react";
 import actionBg from "../../assets/action3.png";
 import leftArrow from "../../assets/left.svg";
 import rightArrow from "../../assets/right.svg";
-import img1 from "../../assets/about-gallery/1.jpg";
-import img2 from "../../assets/about-gallery/2.jpg";
-import img3 from "../../assets/about-gallery/3.jpg";
-import img4 from "../../assets/about-gallery/4.jpg";
-import img5 from "../../assets/about-gallery/5.jpg";
+import img1 from "../../assets/about-gallery/1.webp";
+import img2 from "../../assets/about-gallery/2.webp";
+import img3 from "../../assets/about-gallery/3.webp";
+import img4 from "../../assets/about-gallery/4.webp";
+import img5 from "../../assets/about-gallery/5.webp";
+import LazyImage from "../../components/LazyImage";
+
 
 const originalImages = [img1, img2, img3, img4, img5];
 const GAP = 32;
@@ -128,7 +130,7 @@ export default function AboutGallery() {
                       height: `${cardWidth}px`,
                     }}
                   >
-                    <img
+                    <LazyImage
                       src={img}
                       alt="Gallery"
                       className="w-full h-full object-cover rounded-lg"

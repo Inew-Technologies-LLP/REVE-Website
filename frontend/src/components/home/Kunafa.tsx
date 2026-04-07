@@ -1,4 +1,4 @@
-import kunafaBg from "../../assets/kunafa.jpg";
+import kunafaBg from "../../assets/kunafa.webp";
 import icon from "../../assets/icon1.svg";
 import { Link } from "react-router-dom";
 
