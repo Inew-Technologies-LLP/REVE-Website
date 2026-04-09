@@ -69,7 +69,7 @@ export default function WorkshopsHero() {
         </div>
 
         {/* RIGHT GALLERY */}
-        <div className="relative w-full xl:w-[1000px] h-auto mt-[60px] xl:mt-0 2xl:absolute 2xl:right-0 2xl:top-0 xl:h-full overflow-hidden flex items-center">
+        <div className="relative w-full xl:w-[720px] h-auto mt-[60px] xl:mt-0 2xl:absolute 2xl:right-0 2xl:top-0 xl:h-full overflow-hidden flex items-center">
 
           <div className="w-full overflow-hidden">
 

@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+// ✅ Global cache (persists across renders)
+const loadedImages = new Set<string>();
+
 type LazyImageProps = {
   src: string;
   alt: string;
@@ -11,17 +14,24 @@ const LazyImage: React.FC<LazyImageProps> = ({
   src,
   alt,
   className = "",
-  onClick, // ✅ receive onClick
+  onClick,
 }) => {
-  const [isLoaded, setIsLoaded] = useState<boolean>(false);
+  // ✅ Initialize from cache
+  const [isLoaded, setIsLoaded] = useState<boolean>(
+    loadedImages.has(src)
+  );
 
   return (
     <img
       src={src}
       alt={alt}
       loading="lazy"
-      onLoad={() => setIsLoaded(true)}
-      onClick={onClick} // ✅ pass it here
+      decoding="async"
+      onLoad={() => {
+        loadedImages.add(src); // ✅ store in cache
+        setIsLoaded(true);
+      }}
+      onClick={onClick}
       className={`
         ${className}
         transition-all duration-500 ease-in-out
@@ -31,4 +41,4 @@ const LazyImage: React.FC<LazyImageProps> = ({
   );
 };
 
-export default LazyImage;
+export default React.memo(LazyImage);
