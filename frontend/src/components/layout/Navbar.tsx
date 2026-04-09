@@ -20,7 +20,7 @@ const Navbar = () => {
       <div className="w-full max-w-[1440px] mx-auto h-[72px] px-4 sm:px-8 lg:px-[64px] flex items-center justify-between">
 
         {/* Logo */}
-        <NavLink to="/">
+        <NavLink to="/" onClick={() => setIsOpen(false)}>
           <img
             src={navLogo}
             alt="Reve Patisserie Logo"
