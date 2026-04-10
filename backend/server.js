@@ -660,15 +660,16 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
     const fileName = Date.now() + "-" + file.originalname
 
     const command = new PutObjectCommand({
-      Bucket: "reve",
-      Key: fileName,
-      Body: file.buffer,
-      ContentType: file.mimetype
-    })
+  Bucket: "reve",
+  Key: fileName,
+  Body: file.buffer,
+  ContentType: file.mimetype,
+  CacheControl: "public, max-age=31536000, immutable" // ✅ ADD THIS
+});
 
     await s3.send(command)
 
-    const imageUrl = `https://pub-2b8954364be5464e8c96d5db8c58e029.r2.dev/${fileName}`
+    const imageUrl = `https://images.revepatisserie.com/${fileName}`;
 
     res.json({ url: imageUrl })
 

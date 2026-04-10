@@ -10,6 +10,7 @@ const Hero = () => {
      <img  
   src={heroImage}  
   alt="Hero Background"  
+  loading="eager"
   className="absolute inset-0 w-full h-full object-cover origin-right opacity-90 "
 />
 
