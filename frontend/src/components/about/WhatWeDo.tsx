@@ -95,7 +95,7 @@ function Card({
   image: string;
 }) {
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <div className="w-full aspect-[350/300] overflow-hidden rounded-lg">
         <LazyImage
           src={image}
@@ -108,14 +108,13 @@ function Card({
         {title}
       </h3>
 
-      <p className="text-sm sm:text-base font-normal font-['Quicksand'] mb-6">
+      <p className="text-sm sm:text-base font-normal font-['Quicksand'] mb-6 flex-grow">
         {description}
       </p>
 
-      {/* LINK BUTTON */}
       <Link
         to={link}
-        className="w-full h-12 bg-[#86A788] text-white font-['Roboto'] rounded-md flex items-center justify-center hover:opacity-90 transition"
+        className="h-12 bg-[#86A788] text-white font-['Roboto'] rounded-md flex items-center justify-center hover:opacity-90 transition"
       >
         Know More
       </Link>

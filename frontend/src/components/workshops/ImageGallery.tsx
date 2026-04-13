@@ -112,7 +112,7 @@ export default function HamperGallery() {
 
               {images.map((img, i) => (
                 <div
-                  key={i}
+                  key={`${img}-${i}`}
                   style={{
                     width:
                       visibleCards === 1
