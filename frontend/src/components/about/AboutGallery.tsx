@@ -123,7 +123,7 @@ export default function AboutGallery() {
               >
                 {images.map((img, i) => (
                   <div
-                    key={i}
+                    key={`${img}-${i}`}
                     className="flex-shrink-0"
                     style={{
                       width: `${cardWidth}px`,
