@@ -9,21 +9,25 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-
-
-const db = mysql.createConnection({
+const db = mysql.createPool({
   host: process.env.db_host,
   user: process.env.db_user,
   password: process.env.db_password,
   database: process.env.db_name,
-  port: process.env.db_port
+  port: Number(process.env.db_port),
+
+  waitForConnections: true,
+  connectionLimit: 10,
+  maxIdle: 10,
+  idleTimeout: 60000,
+  queueLimit: 0
 })
 
-db.connect((err) => {
+db.query("SELECT 1", (err) => {
   if (err) {
-    console.log("Connection failed:", err)
+    console.error("❌ MySQL connection failed:", err)
   } else {
-    console.log("Connected to MySQL database successfully")
+    console.log("✅ Connected to MySQL database successfully")
   }
 })
 
@@ -31,8 +35,6 @@ const { S3Client, PutObjectCommand } = require("@aws-sdk/client-s3")
 const multer = require("multer")
 
 const upload = multer({ storage: multer.memoryStorage() })
-
-
 
 const s3 = new S3Client({
   region: "auto",
@@ -660,12 +662,12 @@ app.post("/upload-image", upload.single("image"), async (req, res) => {
     const fileName = Date.now() + "-" + file.originalname
 
     const command = new PutObjectCommand({
-  Bucket: "reve",
-  Key: fileName,
-  Body: file.buffer,
-  ContentType: file.mimetype,
-  CacheControl: "public, max-age=31536000, immutable" // ✅ ADD THIS
-});
+      Bucket: "reve",
+      Key: fileName,
+      Body: file.buffer,
+      ContentType: file.mimetype,
+      CacheControl: "public, max-age=31536000, immutable" // ✅ ADD THIS
+    });
 
     await s3.send(command)
 
